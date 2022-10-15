@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connection } from "./connection/database.js";
 import authRouters from "./routers/authRouters.js";
-import transactionsRouters from "./routers/transactionsRouters.js";
+import shortenRouters from "./routers/shortenRouters.js";
 
 dotenv.config();
 const app = express();
@@ -16,7 +16,7 @@ app.use("/status", (req, res) => {
 });
 
 app.use(authRouters);
-app.use(transactionsRouters);
+app.use(shortenRouters);
 
 app.listen(process.env.PORT, () => {
   console.log("listening in port " + process.env.PORT);
