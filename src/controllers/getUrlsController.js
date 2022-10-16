@@ -32,8 +32,15 @@ export async function redirectUrl(req, res) {
       return res.sendStatus(404);
     }
 
-    const shortAddress = existsUrl.rows[0].shortAddress;
-    res.redirect(shortAddress);
+    const address = existsUrl.rows[0].address;
+    console.log(existsUrl.rows[0]);
+    const updateViews = existsUrl.rows[0].views + 1;
+    await connection.query(`UPDATE urls SET views = $1 WHERE id = $2;`, [
+      updateViews,
+      existsUrl.rows[0].id,
+    ]);
+    res.redirect(address);
+    return;
   } catch (error) {
     res.status(500).send(error.message);
   }
