@@ -45,3 +45,14 @@ export async function redirectUrl(req, res) {
     res.status(500).send(error.message);
   }
 }
+
+export async function getRanking(req, res) {
+  const rankingArray = await connection.query(`
+  SELECT users.id, users.name, COUNT(urls.address) AS "linksCount", SUM(urls.views) AS "visitCount" FROM users 
+  JOIN urls ON users.id = urls."userId"
+  GROUP BY users.id
+  ORDER BY "visitCount" DESC
+  LIMIT 10;
+  `);
+  res.status(200).send(rankingArray.rows);
+}

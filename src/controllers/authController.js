@@ -40,7 +40,7 @@ export async function signUpUser(req, res) {
       [name, email, passwordHash]
     );
 
-    res.send(201);
+    res.sendStatus(201);
   } catch (error) {
     console.log(error.message);
     res.sendStatus(500);
