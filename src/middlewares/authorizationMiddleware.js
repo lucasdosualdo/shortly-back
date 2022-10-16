@@ -19,7 +19,7 @@ export async function authorizationMiddleware(req, res, next) {
       [session.rows[0].userId]
     );
     if (user.rowCount === 0) {
-      return res.sendStatus(401);
+      return res.sendStatus(404);
     }
     user = user.rows[0];
 

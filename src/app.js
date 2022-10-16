@@ -4,9 +4,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connection } from "./connection/database.js";
 import authRouters from "./routers/authRouters.js";
-import shortenRouters from "./routers/shortenRouters.js";
+import shortenRouter from "./routers/shortenRouter.js";
 import getUrlsRouters from "./routers/getUrlsRouters.js";
 import deleteRouter from "./routers/deleteRouter.js";
+import userDataRouter from "./routers/userDataRouter.js";
 
 dotenv.config();
 const app = express();
@@ -18,9 +19,10 @@ app.use("/status", (req, res) => {
 });
 
 app.use(authRouters);
-app.use(shortenRouters);
+app.use(shortenRouter);
 app.use(getUrlsRouters);
 app.use(deleteRouter);
+app.use(userDataRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("listening in port " + process.env.PORT);
