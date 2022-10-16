@@ -6,6 +6,7 @@ import { connection } from "./connection/database.js";
 import authRouters from "./routers/authRouters.js";
 import shortenRouters from "./routers/shortenRouters.js";
 import getUrlsRouters from "./routers/getUrlsRouters.js";
+import deleteRouter from "./routers/deleteRouter.js";
 
 dotenv.config();
 const app = express();
@@ -19,6 +20,7 @@ app.use("/status", (req, res) => {
 app.use(authRouters);
 app.use(shortenRouters);
 app.use(getUrlsRouters);
+app.use(deleteRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("listening in port " + process.env.PORT);
