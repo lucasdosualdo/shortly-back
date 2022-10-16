@@ -18,3 +18,23 @@ export async function getUrlById(req, res) {
     res.status(500).send(error.message);
   }
 }
+
+export async function redirectUrl(req, res) {
+  const { shortUrl } = req.params;
+  try {
+    const existsUrl = await connection.query(
+      `
+        SELECT * FROM urls WHERE "shortAddress" = $1;
+        `,
+      [shortUrl]
+    );
+    if (existsUrl.rowCount === 0) {
+      return res.sendStatus(404);
+    }
+
+    const shortAddress = existsUrl.rows[0].shortAddress;
+    res.redirect(shortAddress);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
